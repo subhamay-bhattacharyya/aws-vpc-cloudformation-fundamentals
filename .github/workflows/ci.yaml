@@ -37,7 +37,7 @@ jobs:
           echo "aws-account-id=${{ vars.AWS_ACCOUNT_ID }}" >> $GITHUB_OUTPUT
           echo "oidc-role-name=${{ vars.AWS_OIDC_ROLE_NAME }}" >> $GITHUB_OUTPUT
           echo "cfn-templates-s3-bucket=${{ vars.CFN_TEMPLATES_S3_BUCKET_NAME }}" >> $GITHUB_OUTPUT
-          echo "stack-name=${{ github.repository}}" >> $GITHUB_OUTPUT
+          echo "stack-name=${{ github.event.repository.name }}" >> $GITHUB_OUTPUT
 
           echo "## Environment Configuration" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -47,7 +47,7 @@ jobs:
           echo "| AWS Region | ${{ vars.AWS_REGION }} |" >> $GITHUB_STEP_SUMMARY
           echo "| AWS Account ID | ${{ vars.AWS_ACCOUNT_ID }} |" >> $GITHUB_STEP_SUMMARY
           echo "| AWS OIDC Role Name | ${{ vars.AWS_OIDC_ROLE_NAME }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Stack Name | ${{ github.repository }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Stack Name | ${{ github.event.repository.name }} |" >> $GITHUB_STEP_SUMMARY
           echo "| CloudFormation Templates S3 Bucket Name | ${{ vars.CFN_TEMPLATES_S3_BUCKET_NAME }} |" >> $GITHUB_STEP_SUMMARY
 
   deploy-stack:
@@ -61,7 +61,7 @@ jobs:
       aws-account-id: ${{ needs.setup-environment.outputs.aws-account-id }}
       oidc-role-name: ${{ vars.AWS_OIDC_ROLE_NAME }}
       cfn-templates-s3-bucket: ${{ needs.setup-environment.outputs.cfn-templates-s3-bucket }}
-      stack-name: ${{ github.repository }}
+      stack-name: ${{ github.event.repository.name }}
       parameters-file: cloudformation/parameters.json
       template-file: cloudformation/vpc-fundamentals.yaml
 
@@ -75,4 +75,4 @@ jobs:
       aws-region: ${{ needs.setup-environment.outputs.aws-region }}
       aws-account-id: ${{ needs.setup-environment.outputs.aws-account-id }}
       oidc-role-name: ${{ vars.AWS_OIDC_ROLE_NAME }}
-      stack-name: ${{ github.repository }}
+      stack-name: ${{ github.event.repository.name }}
