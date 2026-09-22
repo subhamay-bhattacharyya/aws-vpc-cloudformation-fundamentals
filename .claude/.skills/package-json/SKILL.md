@@ -1,14 +1,11 @@
 ---
 name: package-json
-description: Package.json configuration and requirements
-category: project-specific
-command: Reference
-tags: [package, dependencies, npm, configuration]
+description: Package.json configuration and requirements for the CloudFormation templates project. Use when the user needs guidance on dependencies, npm scripts, semantic versioning, or package configuration for this project.
 ---
 
 # Package.json Skill
 
-Configuration, requirements, and best practices for package.json in this GitHub Action template.
+Configuration, requirements, and best practices for package.json in this CloudFormation templates project.
 
 ## Overview
 

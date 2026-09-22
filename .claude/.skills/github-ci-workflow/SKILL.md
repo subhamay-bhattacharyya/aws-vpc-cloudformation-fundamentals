@@ -1,9 +1,6 @@
 ---
 name: github-ci-workflow
-description: CloudFormation Template Lifecycle CI/CD workflow guide
-category: project-specific
-command: Reference
-tags: [ci-cd, cloudformation, github-actions, aws, automation, deployment]
+description: CloudFormation Template Lifecycle CI/CD workflow guide. Use when the user needs help with the GitHub Actions CI/CD workflow, AWS OIDC setup, template validation, stack deployment, or CI/CD troubleshooting.
 ---
 
 # GitHub CI/CD Workflow Skill

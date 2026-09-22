@@ -1,0 +1,44 @@
+{
+  "projectSkills": [
+    {
+      "name": "contributing",
+      "path": "./.claude/.skills/contributing/SKILL.md",
+      "description": "Guidelines and workflow for contributing to CloudFormation templates. Use when working on contributing code, creating feature branches, writing conventional commits, or preparing pull requests."
+    },
+    {
+      "name": "package-json",
+      "path": "./.claude/.skills/package-json/SKILL.md",
+      "description": "Package.json configuration and requirements for the CloudFormation templates project. Reference for npm scripts, dependencies, and semantic versioning."
+    },
+    {
+      "name": "github-ci-workflow",
+      "path": "./.claude/.skills/github-ci-workflow/SKILL.md",
+      "description": "CloudFormation Template Lifecycle CI/CD workflow guide. Reference for GitHub Actions workflow, AWS OIDC setup, template validation, and deployment."
+    },
+    {
+      "name": "vpc-fundamentals",
+      "path": "./.claude/.skills/vpc-fundamentals/SKILL.md",
+      "description": "Guide for creating CloudFormation nested stack templates for VPC and subnet deployment. Reference for template structure, parameters, outputs, best practices, and multi-environment configurations."
+    }
+  ],
+  "permissions": {},
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read -r f; if [[ \"$f\" == *\"package.json\" ]]; then dir=$(dirname \"$f\"); [[ \"$dir\" == \".\" ]] && dir=\"$(pwd)\" || dir=\"$(cd \"$dir\" && pwd)\"; /Users/subhamaybhattacharyya/Projects/aws-vpc-cloudformation-fundamentals/scripts/update-package-json.sh \"$dir\" \"$dir\"; fi; } 2>/dev/null || true",
+            "statusMessage": "Updating package.json metadata..."
+          },
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read -r f; if [[ \"$f\" == *\"README.md\" ]]; then dir=$(dirname \"$f\"); [[ \"$dir\" == \".\" ]] && dir=\"$(pwd)\" || dir=\"$(cd \"$dir\" && pwd)\"; /Users/subhamaybhattacharyya/Projects/aws-vpc-cloudformation-fundamentals/scripts/update-readme.sh \"$dir/README.md\" \"$dir\"; fi; } 2>/dev/null || true",
+            "statusMessage": "Generating README.md with badges..."
+          }
+        ]
+      }
+    ]
+  }
+}
