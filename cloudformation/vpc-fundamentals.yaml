@@ -25,7 +25,7 @@ Metadata:
         Parameters:
           - PublicSubnetCount
           - PublicSubnetCidrBlocks
-          - PublicAvailabilityZones
+          - PublicSubnetAZ1
           - PublicSubnetNamePrefix
           - PublicRouteTableNamePrefix
       - Label:
@@ -60,8 +60,8 @@ Metadata:
         default: "VPC CIDR Block"
       PublicSubnetCidrBlocks:
         default: "Public Subnet CIDR Blocks"
-      PublicAvailabilityZones:
-        default: "Public Subnet Availability Zones"
+      # PublicAvailabilityZones:
+      #   default: "Public Subnet Availability Zones"
       PrivateSubnetCidrBlocks:
         default: "Private Subnet CIDR Blocks"
       PrivateAvailabilityZones:
@@ -85,10 +85,20 @@ Parameters:
     Description: CI/CD suffix for resource naming
     Default: ""
 
+  ApplicationPrefix:
+    Type: String
+    Description: Application prefix for resource naming
+    Default: app
+
+  PublicSubnetAZ1:
+    Type: String
+    Description: Availability Zone for first public subnet
+    Default: us-east-1a
+
   EnvironmentName:
     Type: String
     Description: Environment name (e.g., single-public, ha-multi-az, private-only)
-    Default: single-public
+    Default: devl
     MinLength: 1
     MaxLength: 50
 
@@ -122,10 +132,10 @@ Parameters:
     Description: CIDR blocks for public subnets (comma-separated)
     Default: 10.1.1.0/24
 
-  PublicAvailabilityZones:
-    Type: String
-    Description: Availability Zones for public subnets (comma-separated)
-    Default: us-east-1a
+  # PublicAvailabilityZones:
+  #   Type: String
+  #   Description: Availability Zones for public subnets (comma-separated)
+  #   Default: us-east-1a
 
   PrivateSubnetCount:
     Type: String
@@ -238,13 +248,13 @@ Resources:
       # Parameters passed to the nested stack template
       # Maps parent stack parameters to nested template parameters
       Parameters:
-        EnvironmentName: !Sub ${EnvironmentName}${CiSuffix}
+        ApplicationPrefix: !Sub ${ApplicationPrefix}${CiSuffix}
         VPCCidrBlock: !Ref VPCCidrBlock
         EnableInternetGateway: !Ref EnableInternetGateway
         EnableDnsHostnames: !Ref EnableDnsHostnames
         PublicSubnetCount: !Ref PublicSubnetCount
         PublicSubnetCidrBlocks: !Ref PublicSubnetCidrBlocks
-        PublicAvailabilityZones: !Ref PublicAvailabilityZones
+        PublicSubnetAZ1: !Ref PublicSubnetAZ1
         PrivateSubnetCount: !Ref PrivateSubnetCount
         PrivateSubnetCidrBlocks: !Ref PrivateSubnetCidrBlocks
         PrivateAvailabilityZones: !Ref PrivateAvailabilityZones
