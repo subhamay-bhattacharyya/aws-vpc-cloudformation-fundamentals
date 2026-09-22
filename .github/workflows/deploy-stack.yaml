@@ -1,0 +1,26 @@
+name: Deploy VPC Stack
+run-name: Deploy the VPC stack using CloudFormation ${{ github.actor }} on ${{ github.ref_name }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment to deploy
+        type: environment
+        required: true
+
+jobs:
+  deploy-stack:
+    name: Deploy VPC Stack
+    uses: subhamay-bhattacharyya-gha/cloudformation-deploy-wf/.github/workflows/cfn-deploy.yaml@v1.1.0
+    with:
+      environment: ${{ github.event.inputs.environment }}
+      concurrency-group: ${{ github.workflow }}-${{ github.event.inputs.environment }}
+      aws-region: ${{ vars.AWS_REGION }}
+      aws-account-id: ${{ vars.AWS_ACCOUNT_ID }}
+      oidc-role-name: ${{ vars.AWS_OIDC_ROLE_NAME }}
+      cfn-templates-s3-bucket: ${{ vars.CFN_NESTED_TEMPLATES_S3_BUCKET_NAME }}
+      stack-name: vpc-fundamentals-${{ github.event.inputs.environment }}
+      parameters-file: cloudformation/parameters.json
+      template-file: cloudformation/vpc-fundamentals.yaml
+    secrets: inherit

@@ -1,0 +1,23 @@
+name: Delete CloudFormation Stack
+run-name: Delete the VPC stack using CloudFormation ${{ github.actor }} on ${{ github.ref_name }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment to delete the stack from
+        type: environment
+        required: true
+
+jobs:
+  delete-stack:
+    name: Delete VPC Stack
+    uses: subhamay-bhattacharyya-gha/cfn-delete-wf/.github/workflows/cfn-delete.yaml@feature/GHA-0001-initial-release-cloudform
+    with:
+      environment: ${{ github.event.inputs.environment }}
+      concurrency-group: ${{ github.workflow }}-${{ github.event.inputs.environment }}
+      aws-region: ${{ vars.AWS_REGION }}
+      aws-account-id: ${{ vars.AWS_ACCOUNT_ID }}
+      oidc-role-name: ${{ vars.AWS_OIDC_ROLE_NAME }}
+      stack-name: vpc-fundamentals-${{ github.event.inputs.environment }} 
+    secrets: inherit

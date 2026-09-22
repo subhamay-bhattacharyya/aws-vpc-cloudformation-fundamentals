@@ -26,13 +26,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals.git"
+    "url": "git+https://github.com/subhamay-bhattacharyya/aws-vpc-cloudformation-fundamentals.git"
   },
   "author": "Subhamay Bhattacharyya",
   "license": "MIT",
   "keywords": ["cloudformation", "vpc", "aws", "infrastructure", "nested-stacks"],
   "bugs": {
-    "url": "https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals/issues"
+    "url": "https://github.com/subhamay-bhattacharyya/aws-vpc-cloudformation-fundamentals/issues"
   },
-  "homepage": "https://github.com/subhamay-bhattacharyya-cfn/cloudformation-template#readme"
+  "homepage": "https://github.com/subhamay-bhattacharyya/aws-vpc-cloudformation-fundamentals#readme"
 }

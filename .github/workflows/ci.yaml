@@ -1,14 +1,14 @@
-name: Deploy CloudFormation Stack
-description: Deploy CloudFormation VPC Stack run by {{ github.actor }}
+name: CI Build
+run-name: CI Build run by {{ github.actor }} in ${{ github.ref_name }}
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - feature/**
-  #     - bug/**
-  #   paths:
-  #     - 'templates/**'
+  push:
+    branches:
+      - feature/**
+      - bug/**
+    paths:
+      - 'cloudformation/**'
   #     - .github/workflows/ci.yaml
 
 
@@ -75,15 +75,4 @@ jobs:
       aws-region: ${{ needs.setup-environment.outputs.aws-region }}
       aws-account-id: ${{ needs.setup-environment.outputs.aws-account-id }}
       oidc-role-name: ${{ vars.AWS_OIDC_ROLE_NAME }}
-      stack-name: ${{ needs.setup-environment.outputs.stack-name }}
-
-
-
-      uses: 
-    with:
-      environment: ${{ needs.setup-environment.outputs.environment }}
-      concurrency-group: ${{ github.workflow }}-${{ needs.setup-environment.outputs.environment }}
-      aws-region: ${{ needs.setup-environment.outputs.aws-region }}
-      aws-account-id: ${{ needs.setup-environment.outputs.aws-account-id }}
-      oidc-role-name: ${{ needs.setup-environment.outputs.oidc-role-name }}
       stack-name: ${{ needs.setup-environment.outputs.stack-name }}
