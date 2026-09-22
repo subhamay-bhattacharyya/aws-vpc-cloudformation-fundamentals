@@ -1,7 +1,7 @@
 {
-  "name": "cloudformation-template",
+  "name": "aws-vpc-cloudformation-fundamentals",
   "version": "0.0.0",
-  "description": "CloudFormation template repository with semantic versioning and automated release management.",
+  "description": "Reusable CloudFormation nested stack templates for deploying AWS VPC infrastructure with security best practices, automated semantic versioning, and CI/CD integration.",
   "main": "index.js",
   "scripts": {
     "release": "semantic-release"
@@ -26,13 +26,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/subhamay-bhattacharyya-cfn/cloudformation-template.git"
+    "url": "git+https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals.git"
   },
   "author": "Subhamay Bhattacharyya",
   "license": "MIT",
-  "keywords": [],
+  "keywords": ["cloudformation", "vpc", "aws", "infrastructure", "nested-stacks"],
   "bugs": {
-    "url": "https://github.com/subhamay-bhattacharyya-cfn/cloudformation-template/issues"
+    "url": "https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals/issues"
   },
   "homepage": "https://github.com/subhamay-bhattacharyya-cfn/cloudformation-template#readme"
 }

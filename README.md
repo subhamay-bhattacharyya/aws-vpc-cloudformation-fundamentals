@@ -1,6 +1,19 @@
 # CloudFormation S3 Template Repository
 
-![Built with Claude Code](https://img.shields.io/badge/Built_with-Claude_Code-D97757?logo=anthropic&logoColor=white)&nbsp;![Commit Activity](https://img.shields.io/github/commit-activity/t/subhamay-bhattacharyya-cfn/cloudformation-template)&nbsp;![Last Commit](https://img.shields.io/github/last-commit/subhamay-bhattacharyya-cfn/cloudformation-template)&nbsp;![Release Date](https://img.shields.io/github/release-date/subhamay-bhattacharyya-cfn/cloudformation-template)&nbsp;![Repo Size](https://img.shields.io/github/repo-size/subhamay-bhattacharyya-cfn/cloudformation-template)&nbsp;![File Count](https://img.shields.io/github/directory-file-count/subhamay-bhattacharyya-cfn/cloudformation-template)&nbsp;![Issues](https://img.shields.io/github/issues/subhamay-bhattacharyya-cfn/cloudformation-template)&nbsp;![Top Language](https://img.shields.io/github/languages/top/subhamay-bhattacharyya-cfn/cloudformation-template)&nbsp;![Status](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/bsubhamay/0d518b3ce02fae859c9a3c4d3bb6b94d/raw/cloudformation-template.json)
+<!-- Row 1: Status - Most Important -->
+[![Release](https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals/actions/workflows/release.yaml/badge.svg)](https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals)&nbsp;[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals)&nbsp;[![Issues](https://img.shields.io/github/issues/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals)](https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals/issues)&nbsp;[![Last Commit](https://img.shields.io/github/last-commit/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals)](https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals/commits)
+
+<!-- Row 2: Code Quality -->
+[![Top Language](https://img.shields.io/github/languages/top/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals)](https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals)&nbsp;[![Commits](https://img.shields.io/github/commit-activity/t/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals)](https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals/commits)
+
+<!-- Row 3: Tech Stack -->
+[![CloudFormation](https://img.shields.io/badge/CloudFormation-IaC-orange?logo=amazon&logoColor=white)](https://aws.amazon.com/cloudformation/)&nbsp;[![Built with Claude Code](https://img.shields.io/badge/Built_with-Claude_Code-D97757?logo=anthropic&logoColor=white)](https://claude.ai/)
+
+<!-- Row 4: Repository Info -->
+[![Files](https://img.shields.io/github/directory-file-count/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals)](https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals)&nbsp;[![Repo Size](https://img.shields.io/github/repo-size/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals)](https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals)&nbsp;[![Release Date](https://img.shields.io/github/release-date/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals)](https://github.com/subhamay-bhattacharyya-cfn/aws-vpc-cloudformation-fundamentals/releases)
+
+<!-- Row 5: Custom Metrics -->
+[![Custom Endpoint](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/subhamay-bhattacharyya-cfn/4b78231973ba23bf79edc938aa3c2db5/raw/aws-vpc-cloudformation-fundamentals.json)](https://gist.github.com/subhamay-bhattacharyya-cfn/4b78231973ba23bf79edc938aa3c2db5)
 
 This repository contains nested CloudFormation templates for deploying S3 buckets with security best practices and optional policy enforcement.
 
