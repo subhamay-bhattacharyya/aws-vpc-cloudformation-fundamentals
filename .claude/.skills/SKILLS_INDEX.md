@@ -33,11 +33,32 @@ Covers:
 
 ---
 
+### 2. [Contribution Workflow](./contributing/SKILL.md)
+
+**Category:** Project-specific  
+**Description:** Guidelines and workflow for contributing to the CloudFormation templates
+
+Covers:
+
+- Development setup and prerequisites
+- Branch naming conventions
+- Development workflow (create issue, code, commit, push, review)
+- Testing requirements
+- Documentation standards
+- Code quality checks
+- Bug reporting guidelines
+- Contributor recognition
+
+**File:** [CONTRIBUTING.md](../../CONTRIBUTING.md)
+
+---
+
 ## Quick Reference
 
 | Skill | Purpose | Main File |
 | ------- | --------- | ----------- |
 | GitHub CI/CD Workflow | CloudFormation deployment automation | .github/workflows/ci.yaml |
+| Contribution Workflow | Contributing guidelines and process | CONTRIBUTING.md |
 
 ---
 
@@ -77,6 +98,7 @@ The CloudFormation Template Lifecycle workflow:
 4. **Reports** comprehensive status summary
 
 **Triggers:**
+
 - Manual via GitHub Actions UI
 - Automatic on PR to `main` with template/parameter changes
 - Programmatic via GitHub CLI or API

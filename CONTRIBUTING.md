@@ -37,6 +37,7 @@ Types:
 - `refactor/` — Code refactoring
 
 Examples:
+
 - `feature/CFN-58-add-encryption`
 - `bug/CFN-42-fix-policy`
 - `docs/CFN-100-update-readme`

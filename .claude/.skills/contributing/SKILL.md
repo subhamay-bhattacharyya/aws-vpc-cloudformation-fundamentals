@@ -1,14 +1,11 @@
 ---
-name: contribution
-description: Guidelines and workflow for contributing to the GitHub Action template
-category: project-specific
-command: Reference
-tags: [contributing, workflow, collaboration]
+name: contributing
+description: Guidelines and workflow for contributing to CloudFormation templates. Use when the user is working on contributing code, setting up development environment, creating feature branches, writing conventional commits, running tests, or preparing pull requests for this project.
 ---
 
 # Contribution Skill
 
-Guidelines and workflow for contributing to this GitHub Action template repository.
+Guidelines and workflow for contributing to the CloudFormation templates repository.
 
 ## Overview
 
@@ -38,7 +35,7 @@ npm ci
 
 ## Branch Naming Convention
 
-Use the pattern: `{type}/GHA-{issue-number}-{description}`
+Use the pattern: `{type}/CFN-{issue-number}-{description}`
 
 Types:
 - `feature/` — New functionality
@@ -48,9 +45,9 @@ Types:
 - `refactor/` — Code refactoring
 
 Examples:
-- `feature/GHA-58-add-logging`
-- `bug/GHA-42-fix-auth`
-- `docs/GHA-100-update-readme`
+- `feature/CFN-58-add-encryption`
+- `bug/CFN-42-fix-policy`
+- `docs/CFN-100-update-readme`
 
 ## Development Workflow
 
@@ -75,7 +72,7 @@ npm run lint
 Use conventional commits for automatic versioning:
 
 ```bash
-npm run commit
+npx cz commit
 ```
 
 Commit types:
@@ -146,5 +143,5 @@ Contributors recognized in:
 
 ## Related Files
 
-- [CONTRIBUTING.md](../../../CONTRIBUTING.md) — Full contribution guide
-- [CLAUDE.md](../../../CLAUDE.md) — Project structure and rules
+- [README.md](../../README.md) — Project overview and templates
+- [CLAUDE.md](../../CLAUDE.md) — Project structure and guidelines
