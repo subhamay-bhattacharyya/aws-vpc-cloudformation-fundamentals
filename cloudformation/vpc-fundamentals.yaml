@@ -74,11 +74,33 @@ Parameters:
     Default: subhamay-cfn-nested-templates-270453428528-devl-us-east-1      ##.s3.us-east-1.amazonaws.com/cfn-nested-aws-ha-multi-az-vpc-subnets/vpc-networking.yaml
     AllowedPattern: ^[a-zA-Z0-9\-]+$
     ConstraintDescription: Must be a valid S3 HTTPS URL to a CloudFormation YAML template
-  
+
   TemplatePrefix:
     Type: String
     Description: S3 prefix for the VPC networking nested stack template
     Default: cfn-nested-aws-ha-multi-az-vpc-subnets
+
+  TemplatesS3Bucket:
+    Type: String
+    Description: S3 bucket for CloudFormation templates
+    Default: subhamay-cfn-nested-templates-270453428528-devl-us-east-1
+    AllowedPattern: ^[a-zA-Z0-9\-]+$
+    ConstraintDescription: Must be a valid S3 bucket name
+
+  TemplatesS3Prefix:
+    Type: String
+    Description: S3 prefix for CloudFormation templates
+    Default: cfn-nested-aws-ha-multi-az-vpc-subnets
+
+  PublicSubnetIds:
+    Type: String
+    Description: Comma-separated list of public subnet IDs
+    Default: ''
+
+  CiSuffix:
+    Type: String
+    Description: CI/CD suffix for resource naming
+    Default: ''
 
   EnvironmentName:
     Type: String
