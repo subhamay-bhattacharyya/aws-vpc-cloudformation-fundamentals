@@ -27,7 +27,7 @@ jobs:
       aws-region: ${{ steps.set-env.outputs.aws-region }}
       aws-account-id: ${{ steps.set-env.outputs.aws-account-id }}
       oidc-role-name: ${{ steps.set-env.outputs.oidc-role-name }}
-      s3-bucket: ${{ steps.set-env.outputs.s3-bucket }}
+      cfn-templates-s3-bucket: ${{ steps.set-env.outputs.cfn-templates-s3-bucket }}
     steps:
       - name: Read environment-specific variables
         id: set-env
@@ -36,7 +36,7 @@ jobs:
           echo "aws-region=${{ vars.AWS_REGION }}" >> $GITHUB_OUTPUT
           echo "aws-account-id=${{ vars.AWS_ACCOUNT_ID }}" >> $GITHUB_OUTPUT
           echo "oidc-role-name=${{ vars.AWS_OIDC_ROLE_NAME }}" >> $GITHUB_OUTPUT
-          echo "s3-bucket=${{ vars.CFN_NESTED_TEMPLATES_S3_BUCKET_NAME }}" >> $GITHUB_OUTPUT
+          echo "cfn-templates-s3-bucket=${{ vars.CFN_TEMPLATES_S3_BUCKET_NAME }}" >> $GITHUB_OUTPUT
           echo "stack-name=${{ github.repository}}" >> $GITHUB_OUTPUT
 
           echo "## Environment Configuration" >> $GITHUB_STEP_SUMMARY
@@ -48,7 +48,7 @@ jobs:
           echo "| AWS Account ID | ${{ vars.AWS_ACCOUNT_ID }} |" >> $GITHUB_STEP_SUMMARY
           echo "| AWS OIDC Role Name | ${{ vars.AWS_OIDC_ROLE_NAME }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Stack Name | ${{ github.repository }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Nested Templates S3 Bucket Name | ${{ vars.CFN_NESTED_TEMPLATES_S3_BUCKET_NAME }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| CloudFormation Templates S3 Bucket Name | ${{ vars.CFN_TEMPLATES_S3_BUCKET_NAME }} |" >> $GITHUB_STEP_SUMMARY
 
   deploy-stack:
     name: Deploy VPC Stack
@@ -60,14 +60,14 @@ jobs:
       aws-region: ${{ needs.setup-environment.outputs.aws-region }}
       aws-account-id: ${{ needs.setup-environment.outputs.aws-account-id }}
       oidc-role-name: ${{ vars.AWS_OIDC_ROLE_NAME }}
-      cfn-templates-s3-bucket: ${{ vars.CFN_NESTED_TEMPLATES_S3_BUCKET_NAME }}
-      stack-name: ${{ needs.setup-environment.outputs.stack-name }}
+      cfn-templates-s3-bucket: ${{ needs.setup-environment.outputs.cfn-templates-s3-bucket }}
+      stack-name: ${{ github.repository }}
       parameters-file: cloudformation/parameters.json
       template-file: cloudformation/vpc-fundamentals.yaml
 
   delete-stack:
     name: Delete VPC Stack
-    needs: deploy-stack
+    needs: [deploy-stack, setup-environment]
     uses: subhamay-bhattacharyya-gha/cfn-delete-wf/.github/workflows/cfn-delete.yaml@feature/GHA-0001-initial-release-cloudform
     with:
       environment: ${{ needs.setup-environment.outputs.environment }}
@@ -75,4 +75,4 @@ jobs:
       aws-region: ${{ needs.setup-environment.outputs.aws-region }}
       aws-account-id: ${{ needs.setup-environment.outputs.aws-account-id }}
       oidc-role-name: ${{ vars.AWS_OIDC_ROLE_NAME }}
-      stack-name: ${{ needs.setup-environment.outputs.stack-name }}
+      stack-name: ${{ github.repository }}
