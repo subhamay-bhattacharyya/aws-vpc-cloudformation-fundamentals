@@ -50,6 +50,35 @@ package.json                       # Dependencies: semantic-release, commitizen
 README.md                          # Template documentation and usage examples
 ```
 
+## Project Skills & Documentation
+
+This project includes project-specific skills and guides documented in `.claude/.skills/`:
+
+**Available Project Skills:**
+
+1. **contributing** (`.claude/.skills/contributing/SKILL.md`)
+   - Guidelines and workflow for contributing to CloudFormation templates
+   - Branch naming conventions: `{type}/CFN-{issue-number}-{description}`
+   - Development setup, testing requirements, and code quality standards
+   - Conventional commits workflow with semantic versioning
+
+2. **package-json** (`.claude/.skills/package-json/SKILL.md`)
+   - Package.json configuration and requirements
+   - npm scripts, dependencies, and semantic versioning setup
+   - Project metadata and required fields
+
+3. **github-ci-workflow** (`.claude/.skills/github-ci-workflow/SKILL.md`)
+   - CloudFormation Template Lifecycle CI/CD workflow guide
+   - GitHub Actions workflow setup and AWS OIDC authentication
+   - Template validation, deployment, and cleanup procedures
+   - Troubleshooting CI/CD issues
+
+**How to Use Project Skills:**
+
+When asking Claude for help with contribution workflows, package setup, or CI/CD topics, reference the relevant skill file from `.claude/.skills/` or ask Claude to review the specific skill documentation.
+
+See `.claude/settings.json` for the complete project skill registry.
+
 ## Development Commands
 
 ### Install dependencies
