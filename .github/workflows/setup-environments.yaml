@@ -15,4 +15,4 @@ jobs:
     name: Setup AWS Environments
     uses: subhamay-bhattacharyya-gha/setup-aws-environments-wf/.github/workflows/setup-environments.yaml@v1.3.0
     secrets:
-      GH_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GH_PAT: ${{ secrets.GH_PAT }}
