@@ -1,0 +1,20 @@
+{
+  "projectSkills": [
+    {
+      "name": "contributing",
+      "path": "./.claude/.skills/contributing/SKILL.md",
+      "description": "Guidelines and workflow for contributing to CloudFormation templates. Use when working on contributing code, creating feature branches, writing conventional commits, or preparing pull requests."
+    },
+    {
+      "name": "package-json",
+      "path": "./.claude/.skills/package-json/SKILL.md",
+      "description": "Package.json configuration and requirements for the CloudFormation templates project. Reference for npm scripts, dependencies, and semantic versioning."
+    },
+    {
+      "name": "github-ci-workflow",
+      "path": "./.claude/.skills/github-ci-workflow/SKILL.md",
+      "description": "CloudFormation Template Lifecycle CI/CD workflow guide. Reference for GitHub Actions workflow, AWS OIDC setup, template validation, and deployment."
+    }
+  ],
+  "permissions": []
+}
