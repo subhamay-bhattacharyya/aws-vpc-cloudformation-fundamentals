@@ -29,6 +29,7 @@ npm ci
 Use the pattern: `{type}/CFN-{issue-number}-{description}`
 
 Types:
+
 - `feature/` — New functionality
 - `bug/` — Bug fixes
 - `docs/` — Documentation updates
@@ -67,6 +68,7 @@ npx cz commit
 ```
 
 Commit types:
+
 - `feat:` → MINOR version bump (e.g., 0.1.0 → 0.2.0)
 - `fix:` → PATCH version bump (e.g., 0.1.0 → 0.1.1)
 - `docs:` → No version bump
@@ -74,7 +76,8 @@ Commit types:
 - `BREAKING CHANGE:` → MAJOR version bump (e.g., 0.1.0 → 1.0.0)
 
 Example commit message:
-```
+
+```text
 feat: add support for S3 bucket encryption policies
 ```
 
@@ -85,6 +88,7 @@ git push origin feature/CFN-123-description
 ```
 
 Create a pull request with:
+
 - Clear description of changes
 - Reference to the related issue number
 - Type of change (feature/fix/docs/etc)
@@ -121,6 +125,7 @@ Before submitting a pull request, run code review and simplification checks:
 ## Reporting Bugs
 
 When reporting bugs, please include:
+
 - Clear description of the issue
 - Steps to reproduce the problem
 - Expected vs actual behavior
@@ -132,6 +137,7 @@ Check [open issues](https://github.com/subhamay-bhattacharyya/aws-vpc-cloudforma
 ## Recognition
 
 Contributors are recognized in:
+
 - `CHANGELOG.md` (for significant changes)
 - Project acknowledgments (for major contributors)
 
