@@ -1,5 +1,5 @@
 name: CI Build
-run-name: CI Build run by {{ github.actor }} in ${{ github.ref_name }}
+run-name: CI Build run by ${{ github.actor }} in ${{ github.ref_name }}
 
 on:
   workflow_dispatch:
