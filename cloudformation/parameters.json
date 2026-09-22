@@ -11,7 +11,6 @@
   "PrivateAvailabilityZones": "",
   "EnableNATGateway": "false",
   "EnableHighAvailabilityNAT": "false",
-  "PublicSubnetIds": "",
   "EnableNACLs": "false",
   "CreateSecurityGroups": "true",
   "PublicSubnetCidr": "10.1.1.0/24",
@@ -24,6 +23,6 @@
   "PublicRouteTableNamePrefix": "pub-rt",
   "PrivateSubnetNamePrefix": "pvt-subnet",
   "PrivateRouteTableNamePrefix": "pvt-rt",
-  "TemplatesS3Bucket": "subhamay-cfn-nested-templates-270453428528-devl-us-east-1",
-  "TemplatesS3Prefix": "cfn-nested-aws-ha-multi-az-vpc-subnets"
+  "VPCTemplateS3Bucket": "subhamay-cfn-nested-templates-270453428528-devl-us-east-1",
+  "TemplatePrefix": "cfn-nested-aws-ha-multi-az-vpc-subnets"
 }
