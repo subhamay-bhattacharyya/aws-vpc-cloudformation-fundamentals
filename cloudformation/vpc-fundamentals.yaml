@@ -13,6 +13,7 @@ Metadata:
       - Label:
           default: "Environment Configuration"
         Parameters:
+          - ApplicationPrefix
           - EnvironmentName
       - Label:
           default: "VPC Configuration"
@@ -26,78 +27,54 @@ Metadata:
           - PublicSubnetCount
           - PublicSubnetCidrBlocks
           - PublicSubnetAZ1
-          - PublicSubnetNamePrefix
-          - PublicRouteTableNamePrefix
+          - MapPublicIpOnLaunch
       - Label:
-          default: "Private Subnet Configuration"
-        Parameters:
-          - PrivateSubnetCount
-          - PrivateSubnetCidrBlocks
-          - PrivateAvailabilityZones
-          - PrivateSubnetNamePrefix
-          - PrivateRouteTableNamePrefix
-          - EnableNATGateway
-          - EnableHighAvailabilityNAT
-      - Label:
-          default: "Network ACL & Security Configuration"
+          default: "Network Configuration"
         Parameters:
           - EnableNACLs
-          - CreateSecurityGroups
-          - AllowSSHFromPrivate
-          - AllowPingFromPrivate
-          - AllowHTTPFromInternet
-          - AllowHTTPSFromInternet
-          - PublicSubnetCidr
-          - PrivateSubnetCidr
     ParameterLabels:
       VPCTemplateS3Bucket:
         default: "VPC Nested Stack Template S3 Bucket"
       TemplatePrefix:
         default: "VPC Nested Stack Template S3 Prefix"
+      ApplicationPrefix:
+        default: "Application Prefix"
       EnvironmentName:
         default: "Environment Name"
       VPCCidrBlock:
         default: "VPC CIDR Block"
+      PublicSubnetCount:
+        default: "Public Subnet Count"
       PublicSubnetCidrBlocks:
         default: "Public Subnet CIDR Blocks"
-      # PublicAvailabilityZones:
-      #   default: "Public Subnet Availability Zones"
-      PrivateSubnetCidrBlocks:
-        default: "Private Subnet CIDR Blocks"
-      PrivateAvailabilityZones:
-        default: "Private Subnet Availability Zones"
+      PublicSubnetAZ1:
+        default: "Public Subnet Availability Zone"
+      MapPublicIpOnLaunch:
+        default: "Map Public IP on Launch"
+      EnableNACLs:
+        default: "Enable Network ACLs"
 
 Parameters:
   VPCTemplateS3Bucket:
     Type: String
-    Description: S3 URL to the VPC networking nested stack template
-    Default: subhamay-cfn-nested-templates-270453428528-devl-us-east-1      ##.s3.us-east-1.amazonaws.com/cfn-nested-aws-ha-multi-az-vpc-subnets/vpc-networking.yaml
+    Description: S3 bucket for the VPC networking nested stack template
+    Default: subhamay-cfn-nested-templates-270453428528-devl-us-east-1
     AllowedPattern: ^[a-zA-Z0-9\-]+$
-    ConstraintDescription: Must be a valid S3 HTTPS URL to a CloudFormation YAML template
+    ConstraintDescription: Must be a valid S3 bucket name
 
   TemplatePrefix:
     Type: String
     Description: S3 prefix for the VPC networking nested stack template
     Default: cfn-nested-aws-ha-multi-az-vpc-subnets
 
-  CiSuffix:
-    Type: String
-    Description: CI/CD suffix for resource naming
-    Default: ""
-
   ApplicationPrefix:
     Type: String
     Description: Application prefix for resource naming
-    Default: app
-
-  PublicSubnetAZ1:
-    Type: String
-    Description: Availability Zone for first public subnet
-    Default: us-east-1a
+    Default: web
 
   EnvironmentName:
     Type: String
-    Description: Environment name (e.g., single-public, ha-multi-az, private-only)
+    Description: Environment name
     Default: devl
     MinLength: 1
     MaxLength: 50
@@ -105,7 +82,7 @@ Parameters:
   VPCCidrBlock:
     Type: String
     Description: CIDR block for the VPC
-    Default: 10.1.0.0/16
+    Default: 10.2.0.0/16
     AllowedPattern: ^(\d{1,3}\.){3}\d{1,3}/\d{1,2}$
     ConstraintDescription: Must be a valid IPv4 CIDR block
 
@@ -123,119 +100,38 @@ Parameters:
 
   PublicSubnetCount:
     Type: String
-    Description: Number of public subnets to create (0-4)
+    Description: Number of public subnets to create
     Default: '1'
     AllowedValues: ['0', '1', '2', '3', '4']
 
   PublicSubnetCidrBlocks:
     Type: String
     Description: CIDR blocks for public subnets (comma-separated)
-    Default: 10.1.1.0/24
+    Default: 10.2.1.0/24
 
-  # PublicAvailabilityZones:
-  #   Type: String
-  #   Description: Availability Zones for public subnets (comma-separated)
-  #   Default: us-east-1a
-
-  PrivateSubnetCount:
+  PublicSubnetAZ1:
     Type: String
-    Description: Number of private subnets to create (0-4)
-    Default: '0'
-    AllowedValues: ['0', '1', '2', '3', '4']
+    Description: Availability Zone for first public subnet
+    Default: us-east-1a
 
-  PrivateSubnetCidrBlocks:
+  MapPublicIpOnLaunch:
     Type: String
-    Description: CIDR blocks for private subnets (comma-separated, leave empty for 0 subnets)
-    Default: ''
-
-  PrivateAvailabilityZones:
-    Type: String
-    Description: Availability Zones for private subnets (comma-separated, leave empty for 0 subnets)
-    Default: ''
-
-  EnableNATGateway:
-    Type: String
-    Description: Enable NAT Gateway for private subnet internet egress
-    Default: 'false'
-    AllowedValues: ['true', 'false']
-
-  EnableHighAvailabilityNAT:
-    Type: String
-    Description: Create one NAT Gateway per AZ for high availability
-    Default: 'false'
+    Description: Auto-assign public IPv4 addresses to instances launched in public subnets
+    Default: 'true'
     AllowedValues: ['true', 'false']
 
   EnableNACLs:
     Type: String
-    Description: Enable Network ACLs for private subnets
-    Default: 'false'
-    AllowedValues: ['true', 'false']
-
-  CreateSecurityGroups:
-    Type: String
-    Description: Create security groups for public and private subnets
+    Description: Enable Network ACLs for subnets
     Default: 'true'
     AllowedValues: ['true', 'false']
-
-  AllowSSHFromPrivate:
-    Type: String
-    Description: Allow SSH (port 22) from private subnets to public subnets
-    Default: 'false'
-    AllowedValues: ['true', 'false']
-
-  AllowPingFromPrivate:
-    Type: String
-    Description: Allow PING (ICMP) from private subnets to public subnets
-    Default: 'false'
-    AllowedValues: ['true', 'false']
-
-  AllowHTTPFromInternet:
-    Type: String
-    Description: Allow HTTP (port 80) from internet to public subnets
-    Default: 'true'
-    AllowedValues: ['true', 'false']
-
-  AllowHTTPSFromInternet:
-    Type: String
-    Description: Allow HTTPS (port 443) from internet to public subnets
-    Default: 'true'
-    AllowedValues: ['true', 'false']
-
-  PublicSubnetCidr:
-    Type: String
-    Description: CIDR block for public subnets (for ingress/egress rules)
-    Default: 10.1.1.0/24
-
-  PrivateSubnetCidr:
-    Type: String
-    Description: CIDR block for private subnets (for ingress/egress rules)
-    Default: ''
-
-  PublicSubnetNamePrefix:
-    Type: String
-    Description: Name prefix for public subnets
-    Default: pub-subnet
-
-  PublicRouteTableNamePrefix:
-    Type: String
-    Description: Name prefix for public route tables
-    Default: pub-rt
-
-  PrivateSubnetNamePrefix:
-    Type: String
-    Description: Name prefix for private subnets
-    Default: pvt-subnet
-
-  PrivateRouteTableNamePrefix:
-    Type: String
-    Description: Name prefix for private route tables
-    Default: pvt-rt
 
 Resources:
   # Nested Stack for VPC Networking
   # This resource references an external VPC networking template stored in S3.
   # The nested stack creates and manages VPC, subnets, IGW, and routing infrastructure.
   # See: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html
+  # cfn-lint: disable=W4001
   VPCNetworkingStack:
     Type: AWS::CloudFormation::Stack
     DeletionPolicy: Delete
@@ -248,30 +144,31 @@ Resources:
       # Parameters passed to the nested stack template
       # Maps parent stack parameters to nested template parameters
       Parameters:
-        ApplicationPrefix: !Sub ${ApplicationPrefix}${CiSuffix}
+        ApplicationPrefix: !Ref ApplicationPrefix
         VPCCidrBlock: !Ref VPCCidrBlock
         EnableInternetGateway: !Ref EnableInternetGateway
         EnableDnsHostnames: !Ref EnableDnsHostnames
         PublicSubnetCount: !Ref PublicSubnetCount
         PublicSubnetCidrBlocks: !Ref PublicSubnetCidrBlocks
         PublicSubnetAZ1: !Ref PublicSubnetAZ1
-        PrivateSubnetCount: !Ref PrivateSubnetCount
-        PrivateSubnetCidrBlocks: !Ref PrivateSubnetCidrBlocks
-        PrivateAvailabilityZones: !Ref PrivateAvailabilityZones
-        EnableNATGateway: !Ref EnableNATGateway
-        EnableHighAvailabilityNAT: !Ref EnableHighAvailabilityNAT
+        MapPublicIpOnLaunch: !Ref MapPublicIpOnLaunch
+        PrivateSubnetCount: '0'
+        PrivateSubnetCidrBlocks: ''
+        PrivateAvailabilityZones: ''
+        EnableNATGateway: 'false'
+        EnableHighAvailabilityNAT: 'false'
         EnableNACLs: !Ref EnableNACLs
-        CreateSecurityGroups: !Ref CreateSecurityGroups
-        AllowSSHFromPrivate: !Ref AllowSSHFromPrivate
-        AllowPingFromPrivate: !Ref AllowPingFromPrivate
-        AllowHTTPFromInternet: !Ref AllowHTTPFromInternet
-        AllowHTTPSFromInternet: !Ref AllowHTTPSFromInternet
-        PublicSubnetCidr: !Ref PublicSubnetCidr
-        PrivateSubnetCidr: !Ref PrivateSubnetCidr
-        PublicSubnetNamePrefix: !Ref PublicSubnetNamePrefix
-        PublicRouteTableNamePrefix: !Ref PublicRouteTableNamePrefix
-        PrivateSubnetNamePrefix: !Ref PrivateSubnetNamePrefix
-        PrivateRouteTableNamePrefix: !Ref PrivateRouteTableNamePrefix
+        CreateSecurityGroups: 'false'
+        AllowSSHFromPrivate: 'false'
+        AllowPingFromPrivate: 'false'
+        AllowHTTPFromInternet: 'false'
+        AllowHTTPSFromInternet: 'false'
+        PublicSubnetCidr: !Ref PublicSubnetCidrBlocks
+        PrivateSubnetCidr: ''
+        PublicSubnetNamePrefix: pub-subnet
+        PublicRouteTableNamePrefix: pub-rt
+        PrivateSubnetNamePrefix: pvt-subnet
+        PrivateRouteTableNamePrefix: pvt-rt
 
       # Tags are propagated to all resources in the nested stack
       Tags:
@@ -288,12 +185,6 @@ Resources:
       TimeoutInMinutes: 20
 
 Outputs:
-  VPCNetworkingStackId:
-    Description: VPC Networking Nested Stack ID
-    Value: !Ref VPCNetworkingStack
-    Export:
-      Name: !Sub '${AWS::StackName}-vpc-networking-stack-id'
-
   VpcId:
     Description: VPC ID
     Value: !GetAtt VPCNetworkingStack.Outputs.VpcId
@@ -306,47 +197,23 @@ Outputs:
     Export:
       Name: !Sub '${AWS::StackName}-vpc-cidr'
 
-  PublicSubnetId:
-    Description: Public Subnet 1 ID
-    Value: !Select [0, !Split [',', !GetAtt VPCNetworkingStack.Outputs.PublicSubnetIds]]
-    Export:
-      Name: !Sub '${AWS::StackName}-public-subnet-1-id'
-
-  PublicSubnetCidrBlocks:
-    Description: Public Subnet CIDR Blocks
-    Value: !Ref PublicSubnetCidrBlocks
-    Export:
-      Name: !Sub '${AWS::StackName}-public-subnet-cidr-blocks'
-
-  PrivateSubnetId:
-    Description: Private Subnet 1 ID
-    Value: !GetAtt VPCNetworkingStack.Outputs.PrivateSubnetIds
-    Export:
-      Name: !Sub '${AWS::StackName}-private-subnet-ids'
-
-  PrivateSubnetCidrBlocks:
-    Description: Private Subnet CIDR Blocks
-    Value: !Ref PrivateSubnetCidrBlocks
-    Export:
-      Name: !Sub '${AWS::StackName}-private-subnet-cidr-blocks'
-
   InternetGatewayId:
     Description: Internet Gateway ID
     Value: !GetAtt VPCNetworkingStack.Outputs.InternetGatewayId
     Export:
       Name: !Sub '${AWS::StackName}-igw-id'
 
+  PublicSubnetIds:
+    Description: Public Subnet IDs
+    Value: !GetAtt VPCNetworkingStack.Outputs.PublicSubnetIds
+    Export:
+      Name: !Sub '${AWS::StackName}-public-subnet-ids'
+
   PublicRouteTableId:
     Description: Public Route Table ID
     Value: !GetAtt VPCNetworkingStack.Outputs.PublicRouteTableId
     Export:
       Name: !Sub '${AWS::StackName}-public-rt-id'
-
-  PrivateRouteTableIds:
-    Description: Private Route Table IDs
-    Value: !GetAtt VPCNetworkingStack.Outputs.PrivateRouteTableIds
-    Export:
-      Name: !Sub '${AWS::StackName}-private-rt-ids'
 
   EnvironmentName:
     Description: Environment Name

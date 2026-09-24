@@ -1,26 +1,68 @@
-name: Deploy VPC Stack
-run-name: Deploy the VPC stack using CloudFormation ${{ github.actor }} on ${{ github.ref_name }}
+name: CloudFormation CI Build Workflow
+description: Deploy CloudFormation stacks with support for reuse across workflows
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       environment:
-        description: Target environment to deploy
-        type: environment
-        required: true
+        description: GitHub environment name
+        required: false
+        type: string
+        default: ci
+      stack-name:
+        description: CloudFormation stack name (optional, uses config file if not provided)
+        required: false
+        type: string
+
+permissions:
+  actions: write
+  contents: read
+  id-token: write
 
 jobs:
-  deploy-stack:
-    name: Deploy VPC Stack
-    uses: subhamay-bhattacharyya-gha/cloudformation-deploy-wf/.github/workflows/cfn-deploy.yaml@v1.1.0
+  load-config:
+    name: Load Stack Configuration
+    runs-on: ubuntu-latest
+    outputs:
+      stack-name: ${{ steps.config.outputs.stack-name }}
+      template-file: ${{ steps.config.outputs.template-file }}
+      parameter-file: ${{ steps.config.outputs.parameter-file }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - id: config
+        run: |
+          CONFIG=$(cat cloudformation/stack-config.json)
+          if [ -n "${{ inputs.stack-name }}" ]; then
+            STACK_NAME="${{ inputs.stack-name }}"
+          else
+            STACK_NAME=$(echo "$CONFIG" | jq -r '.stackName')
+          fi
+          TEMPLATE_FILE=$(echo "$CONFIG" | jq -r '.templateFile')
+          PARAMETER_FILE=$(echo "$CONFIG" | jq -r '.parameterFile')
+          echo "stack-name=$STACK_NAME" >> $GITHUB_OUTPUT
+          echo "template-file=$TEMPLATE_FILE" >> $GITHUB_OUTPUT
+          echo "parameter-file=$PARAMETER_FILE" >> $GITHUB_OUTPUT
+
+          # Write to GitHub step summary
+          {
+            echo "## Stack Configuration"
+            echo ""
+            echo "| Property | Value |"
+            echo "|----------|-------|"
+            echo "| Stack Name | \`$STACK_NAME\` |"
+            echo "| Template File | \`$TEMPLATE_FILE\` |"
+            echo "| Parameter File | \`$PARAMETER_FILE\` |"
+          } >> $GITHUB_STEP_SUMMARY
+
+  deploy-cloudformation-stack:
+    name: Deploy CloudFormation Stack
+    needs: load-config
+    concurrency:
+      group: ${{ github.workflow }}-${{ inputs.environment }}
+      cancel-in-progress: true
+    uses: subhamay-bhattacharyya-gha/cfn-deploy-wf/.github/workflows/cfn-deploy.yaml@v1.3.0
     with:
-      environment: ${{ github.event.inputs.environment }}
-      concurrency-group: ${{ github.workflow }}-${{ github.event.inputs.environment }}
-      aws-region: ${{ vars.AWS_REGION }}
-      aws-account-id: ${{ vars.AWS_ACCOUNT_ID }}
-      oidc-role-name: ${{ vars.AWS_OIDC_ROLE_NAME }}
-      cfn-templates-s3-bucket: ${{ vars.CFN_NESTED_TEMPLATES_S3_BUCKET_NAME }}
-      stack-name: vpc-fundamentals-${{ github.event.inputs.environment }}
-      parameters-file: cloudformation/parameters.json
-      template-file: cloudformation/vpc-fundamentals.yaml
-    secrets: inherit
+      environment: ${{ inputs.environment }}
+      stack-name: ${{ needs.load-config.outputs.stack-name }}
+      parameters-file: ${{ needs.load-config.outputs.parameter-file }}
+      template-file: ${{ needs.load-config.outputs.template-file }}
