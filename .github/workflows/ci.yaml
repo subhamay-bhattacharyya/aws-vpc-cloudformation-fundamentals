@@ -9,7 +9,7 @@ on:
       - bug/**
     paths:
       - 'cloudformation/**'
-      - .github/workflows/ci.yaml
+      # - .github/workflows/ci.yaml
   pull_request:
     branches: [main]
     paths:
@@ -54,7 +54,7 @@ jobs:
   ci-build:
     name: CI Build
     needs: load-config
-    uses: subhamay-bhattacharyya-gha/cfn-ci-build-reusable-wf/.github/workflows/ci.yaml@v1.0.0
+    uses: subhamay-bhattacharyya-gha/cfn-ci-build-reusable-wf/.github/workflows/ci.yaml@feature/GHA-0007-upgrade-cfn-deploy-wf-reu
     with:
       environment: ci
       stack-name: ${{ needs.load-config.outputs.stack-name }}
