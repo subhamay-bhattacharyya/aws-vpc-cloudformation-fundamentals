@@ -150,6 +150,7 @@ Resources:
       # Maps parent stack parameters to nested template parameters
       Parameters:
         ApplicationPrefix: !Sub ${ApplicationPrefix}${CiSuffix}
+        EnvironmentName: !Ref EnvironmentName
         VPCCidrBlock: !Ref VPCCidrBlock
         EnableInternetGateway: !Ref EnableInternetGateway
         EnableDnsHostnames: !Ref EnableDnsHostnames
