@@ -9,7 +9,7 @@ on:
       - bug/**
     paths:
       - 'cloudformation/**'
-      # - .github/workflows/ci.yaml
+      - .github/workflows/ci.yaml
   pull_request:
     branches: [main]
     paths:
