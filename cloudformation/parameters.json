@@ -1,11 +1,11 @@
 {
   "ApplicationPrefix": "web",
   "EnvironmentName": "devl",
-  "VPCCidrBlock": "10.2.0.0/16",
+  "VPCCidrBlock": "10.100.0.0/16",
   "EnableInternetGateway": "true",
   "EnableDnsHostnames": "true",
   "PublicSubnetCount": "1",
-  "PublicSubnetCidrBlocks": "10.2.1.0/24",
+  "PublicSubnetCidrBlocks": "10.100.1.0/24",
   "PublicSubnetAZ1": "us-east-1a",
   "MapPublicIpOnLaunch": "true",
   "PrivateSubnetCount": "0",

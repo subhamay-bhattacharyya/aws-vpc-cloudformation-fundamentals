@@ -8,14 +8,12 @@ on:
       - feature/**
       - bug/**
     paths:
-      - 'templates/**'
-      - 'parameters/**'
+      - 'cloudformation/**'
       - .github/workflows/ci.yaml
   pull_request:
     branches: [main]
     paths:
-      - 'templates/**'
-      - 'parameters/**'
+      - 'cloudformation/**'
 
 permissions:
   actions: write
