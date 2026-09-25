@@ -158,6 +158,7 @@ Resources:
         PublicSubnetCidrBlocks: !Ref PublicSubnetCidrBlocks
         PublicSubnetAZ1: !Ref PublicSubnetAZ1
         MapPublicIpOnLaunch: !Ref MapPublicIpOnLaunch
+        PrivateSubnetCount: '0'
         EnableNACLs: !Ref EnableNACLs
         PublicSubnetCidr: !Ref PublicSubnetCidrBlocks
         PublicSubnetNamePrefix: pub-subnet
