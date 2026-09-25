@@ -126,7 +126,7 @@ Parameters:
     Default: 'true'
     AllowedValues: ['true', 'false']
 
-  CiSuffix:  # cfn-lint: disable=W2001
+  CiSuffix:
     Type: String
     Description: CI/CD suffix for resource naming
     Default: ''
@@ -149,7 +149,7 @@ Resources:
       # Parameters passed to the nested stack template
       # Maps parent stack parameters to nested template parameters
       Parameters:
-        ApplicationPrefix: !Ref ApplicationPrefix
+        ApplicationPrefix: !Sub ${ApplicationPrefix}${CiSuffix}
         VPCCidrBlock: !Ref VPCCidrBlock
         EnableInternetGateway: !Ref EnableInternetGateway
         EnableDnsHostnames: !Ref EnableDnsHostnames
@@ -185,6 +185,8 @@ Resources:
           Value: !Ref AWS::StackName
         - Key: TemplateName
           Value: vpc-fundamentals
+        - Key: CiSuffix
+          Value: !Ref CiSuffix
 
       # Timeout for nested stack creation (in minutes)
       TimeoutInMinutes: 20
