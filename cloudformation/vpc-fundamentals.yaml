@@ -126,6 +126,11 @@ Parameters:
     Default: 'true'
     AllowedValues: ['true', 'false']
 
+  CiSuffix:
+    Type: String
+    Description: CI/CD suffix for resource naming
+    Default: ''
+
 Resources:
   # Nested Stack for VPC Networking
   # This resource references an external VPC networking template stored in S3.
