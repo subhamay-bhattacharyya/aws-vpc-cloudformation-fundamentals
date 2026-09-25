@@ -126,7 +126,7 @@ Parameters:
     Default: 'true'
     AllowedValues: ['true', 'false']
 
-  CiSuffix:
+  CiSuffix:  # cfn-lint: disable=W2001
     Type: String
     Description: CI/CD suffix for resource naming
     Default: ''
