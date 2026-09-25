@@ -164,17 +164,9 @@ Resources:
         EnableNATGateway: 'false'
         EnableHighAvailabilityNAT: 'false'
         EnableNACLs: !Ref EnableNACLs
-        CreateSecurityGroups: 'false'
-        AllowSSHFromPrivate: 'false'
-        AllowPingFromPrivate: 'false'
-        AllowHTTPFromInternet: 'false'
-        AllowHTTPSFromInternet: 'false'
         PublicSubnetCidr: !Ref PublicSubnetCidrBlocks
-        PrivateSubnetCidr: ''
         PublicSubnetNamePrefix: pub-subnet
         PublicRouteTableNamePrefix: pub-rt
-        PrivateSubnetNamePrefix: pvt-subnet
-        PrivateRouteTableNamePrefix: pvt-rt
 
       # Tags are propagated to all resources in the nested stack
       Tags:
