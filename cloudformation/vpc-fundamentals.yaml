@@ -181,11 +181,11 @@ Resources:
       TimeoutInMinutes: 20
 
 Outputs:
-  VpcId:
-    Description: VPC ID
-    Value: !GetAtt VPCNetworkingStack.Outputs.VpcId
-    Export:
-      Name: !Sub '${AWS::StackName}-vpc-id'
+  # VpcId:
+  #   Description: VPC ID
+  #   Value: !GetAtt VPCNetworkingStack.Outputs.VpcId
+  #   Export:
+  #     Name: !Sub '${AWS::StackName}-vpc-id'
 
   VpcCidrBlock:
     Description: VPC CIDR Block
@@ -193,23 +193,23 @@ Outputs:
     Export:
       Name: !Sub '${AWS::StackName}-vpc-cidr'
 
-  InternetGatewayId:
-    Description: Internet Gateway ID
-    Value: !GetAtt VPCNetworkingStack.Outputs.InternetGatewayId
-    Export:
-      Name: !Sub '${AWS::StackName}-igw-id'
+  # InternetGatewayId:
+  #   Description: Internet Gateway ID
+  #   Value: !GetAtt VPCNetworkingStack.Outputs.InternetGatewayId
+  #   Export:
+  #     Name: !Sub '${AWS::StackName}-igw-id'
 
-  PublicSubnetIds:
-    Description: Public Subnet IDs
-    Value: !GetAtt VPCNetworkingStack.Outputs.PublicSubnetIds
-    Export:
-      Name: !Sub '${AWS::StackName}-public-subnet-ids'
+  # PublicSubnetIds:
+  #   Description: Public Subnet IDs
+  #   Value: !GetAtt VPCNetworkingStack.Outputs.PublicSubnetIds
+  #   Export:
+  #     Name: !Sub '${AWS::StackName}-public-subnet-ids'
 
-  PublicRouteTableId:
-    Description: Public Route Table ID
-    Value: !GetAtt VPCNetworkingStack.Outputs.PublicRouteTableId
-    Export:
-      Name: !Sub '${AWS::StackName}-public-rt-id'
+  # PublicRouteTableId:
+  #   Description: Public Route Table ID
+  #   Value: !GetAtt VPCNetworkingStack.Outputs.PublicRouteTableId
+  #   Export:
+  #     Name: !Sub '${AWS::StackName}-public-rt-id'
 
   EnvironmentName:
     Description: Environment Name
