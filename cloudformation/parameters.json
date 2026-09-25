@@ -8,9 +8,6 @@
   "PublicSubnetCidrBlocks": "10.100.1.0/24",
   "PublicSubnetAZ1": "us-east-1a",
   "MapPublicIpOnLaunch": "true",
-  "PrivateSubnetCount": "0",
-  "EnableNATGateway": "false",
-  "EnableHighAvailabilityNAT": "false",
   "EnableNACLs": "true",
   "VPCTemplateS3Bucket": "subhamay-cfn-nested-templates-270453428528-devl-us-east-1",
   "TemplatePrefix": "cfn-nested-aws-ha-multi-az-vpc-subnets"
