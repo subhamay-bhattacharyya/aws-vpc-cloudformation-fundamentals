@@ -22,7 +22,7 @@ permissions:
 jobs:
   load-config:
     name: Load Stack Configuration
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     outputs:
       stack-name: ${{ steps.config.outputs.stack-name }}
       template-file: ${{ steps.config.outputs.template-file }}

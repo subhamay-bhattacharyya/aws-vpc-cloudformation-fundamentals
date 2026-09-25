@@ -9,7 +9,7 @@ REPO_DIR="${2:-.}"
 
 # Extract GitHub org from git remote, fallback to parameter or default
 if [ -z "$3" ]; then
-  GITHUB_ORG=$(git -C "$REPO_DIR" config --get remote.origin.url 2>/dev/null | sed -E 's#(https://github\.com/|git@github\.com:)([^/]+)/.*#\2#' || echo "subhamay-bhattacharyya-cfn")
+  GITHUB_ORG=$(git -C "$REPO_DIR" config --get remote.origin.url 2>/dev/null | sed -E 's#(https://github\.com/|git@github\.com:)([^/]+)/.*#\2#' || echo "subhamay-bhattacharyya")
 else
   GITHUB_ORG="$3"
 fi

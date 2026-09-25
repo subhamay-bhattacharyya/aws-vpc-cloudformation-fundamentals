@@ -23,7 +23,7 @@ The README includes the following badges at the top:
 
 ## Badge URLs
 
-All badges use shields.io endpoints with the repository: `subhamay-bhattacharyya-cfn/cloudformation-template`
+All badges use shields.io endpoints with the repository: `subhamay-bhattacharyya/cloudformation-template`
 
 ### Gist Endpoint
 
@@ -61,21 +61,21 @@ Supported colors: `green` (28a745), `yellow` (dfb317), `red` (e05d44), `blue` (0
 
 All badges should display correctly once pushed to main. To verify:
 1. Check the README.md in the GitHub web interface
-2. Ensure all badge URLs use the correct repository name (`subhamay-bhattacharyya-cfn/cloudformation-template`)
+2. Ensure all badge URLs use the correct repository name (`subhamay-bhattacharyya/cloudformation-template`)
 3. Verify the gist endpoint is accessible and returns valid JSON
 
 ### Add New Badge
 
 To add a new badge:
 1. Identify the shields.io endpoint for the badge
-2. Update the repository reference to `subhamay-bhattacharyya-cfn/cloudformation-template`
+2. Update the repository reference to `subhamay-bhattacharyya/cloudformation-template`
 3. Add to the README badges line at the top
 4. Ensure proper spacing with `&nbsp;` between badges
 
 ## Repository Reference
 
-- **Repository**: `subhamay-bhattacharyya-cfn/cloudformation-template`
-- **Organization**: subhamay-bhattacharyya-cfn
+- **Repository**: `subhamay-bhattacharyya/cloudformation-template`
+- **Organization**: subhamay-bhattacharyya
 - **Type**: CloudFormation template repository
 
 ## See Also

@@ -25,7 +25,7 @@ permissions:
 jobs:
   load-config:
     name: Load Stack Configuration
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     outputs:
       stack-name: ${{ steps.config.outputs.stack-name }}
       template-file: ${{ steps.config.outputs.template-file }}
@@ -69,7 +69,7 @@ jobs:
 
   generate-changelog:
     name: Generate Changelog
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: ci-build
     if: github.ref == 'refs/heads/main'
     steps:
@@ -106,7 +106,7 @@ jobs:
 
   create-release:
     name: Create Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: ci-build
     if: github.ref == 'refs/heads/main'
     permissions:
