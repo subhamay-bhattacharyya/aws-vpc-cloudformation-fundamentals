@@ -5,7 +5,7 @@
   "EnableInternetGateway": "true",
   "EnableDnsHostnames": "true",
   "PublicSubnetCount": "1",
-  "PublicSubnetCidrBlocks": "10.100.1.0/24",
+  "PublicSubnetCidrBlocks": "10.10.1.0/24",
   "PublicSubnetAZ1": "us-east-1a",
   "MapPublicIpOnLaunch": "true",
   "EnableNACLs": "true",
