@@ -1,5 +1,5 @@
 {
-  "ApplicationPrefix": "web",
+  "ApplicationPrefix": "web1",
   "EnvironmentName": "devl",
   "VPCCidrBlock": "10.100.0.0/16",
   "EnableInternetGateway": "true",
